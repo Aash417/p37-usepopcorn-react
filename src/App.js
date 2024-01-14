@@ -172,7 +172,7 @@ function Movie({ movie, onSelectMovie }) {
 function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 	const [movie, setMovie] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
-	const [userRating, setUserRating] = useState("");
+	const [userRating, setUserRating] = useState('');
 
 	const countRef = useRef(0);
 	useEffect(
@@ -200,7 +200,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		Genre: genre,
 	} = movie;
 
-	const [avgRating, setAvgRating] = useState(0);
+	// const [avgRating, setAvgRating] = useState(0);
 
 	function handleAdd() {
 		const newWatchedMovie = {
@@ -209,7 +209,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 			year,
 			poster,
 			imdbRating: Number(imdbRating),
-			runtime: Number(runtime.split(" ").at(0)),
+			runtime: Number(runtime.split(' ').at(0)),
 			userRating,
 			countRatingDecision: countRef.current,
 		};
@@ -219,7 +219,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		onCloseMovie();
 	}
 
-	useKey("Escape", onCloseMovie);
+	useKey('Escape', onCloseMovie);
 
 	useEffect(
 		function () {
@@ -243,24 +243,24 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 			document.title = `Movie | ${title}`;
 
 			return function () {
-				document.title = "usePopCorn";
+				document.title = 'usePopCorn';
 			};
 		},
 		[title]
 	);
 
 	return (
-		<div className="details">
+		<div className='details'>
 			{isLoading ? (
 				<Loader />
 			) : (
 				<>
 					<header>
-						<button className="btn-back" onClick={onCloseMovie}>
+						<button className='btn-back' onClick={onCloseMovie}>
 							&larr;
 						</button>
 						<img src={poster} alt={`poster of ${movie}`} />
-						<div className="details-overview">
+						<div className='details-overview'>
 							<h2>{title}</h2>
 							<p>
 								{released} &bull; {runtime}
@@ -273,23 +273,28 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 						</div>
 					</header>
 					<section>
-						<div className="rating">
+						<div className='rating'>
 							{!isWatched ? (
 								<>
-									{" "}
+									{' '}
 									<StarRating
 										maxRating={10}
 										size={24}
 										onSetRating={setUserRating}
 									/>
 									{userRating > 0 && (
-										<button className="btn-add" onClick={handleAdd}>
+										<button
+											className='btn-add'
+											onClick={handleAdd}
+										>
 											Add to list
 										</button>
 									)}
 								</>
 							) : (
-								<p>You rated this movie {watchedUserRating} ⭐</p>
+								<p>
+									You rated this movie {watchedUserRating} ⭐
+								</p>
 							)}
 						</div>
 						<p>
